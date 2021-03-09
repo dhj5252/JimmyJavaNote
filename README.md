@@ -13,3 +13,13 @@ classical sorting algorithm
 
 ## Participantl:
 jim, ben(names in no particular order)
+
+## Main sectors(currently)
+
+Algorithm Knowledge
+
+Database Knowledge
+
+Linux Basics Knowledge
+
+TCP/IP Knowledge
