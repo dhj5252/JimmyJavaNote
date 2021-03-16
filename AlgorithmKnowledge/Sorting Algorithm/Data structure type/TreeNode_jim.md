@@ -116,3 +116,53 @@ void flatten(TreeNode root) {
 }
 ```
 
+# 654 最大二叉树
+
+## question:
+
+给定一个不含重复元素的整数数组。一个以此数组构建的最大二叉树定义如下：
+
+1 二叉树的根是数组重最大的元素
+
+2 左子树是通过数组重最大值的左边部分构造出的最大二叉树
+
+3 右子树是通过数组重最大值右边部分构造除的最大二叉树
+
+## jim result:
+
+```java
+/* 主函数 */
+TreeNode constructMaximumBinaryTree(int[] nums) {
+    return build(nums, 0, nums.length - 1);
+}
+
+/* 将 nums[lo..hi] 构造成符合条件的树，返回根节点 */
+TreeNode build(int[] nums, int lo, int hi) {
+    // base case
+    if (lo > hi) {
+        return null;
+    }
+
+    // 找到数组中的最大值和对应的索引
+    int index = -1, maxVal = Integer.MIN_VALUE;
+    for (int i = lo; i <= hi; i++) {
+        if (maxVal < nums[i]) {
+            index = i;
+            maxVal = nums[i];
+        }
+    }
+
+    TreeNode root = new TreeNode(maxVal);
+    // 递归调用构造左右子树
+    root.left = build(nums, lo, index - 1);
+    root.right = build(nums, index + 1, hi);
+
+    return root;
+}
+```
+
+# 652 寻找重复的子树
+
+## question:
+
+给定一颗二叉树，范围所有重复的子树。对于
