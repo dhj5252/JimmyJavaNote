@@ -165,4 +165,92 @@ TreeNode build(int[] nums, int lo, int hi) {
 
 ## question:
 
-给定一颗二叉树，范围所有重复的子树。对于
+给定一颗二叉树，范围所有重复的子树。对于同一类的重复子树，你只需要返回其中任意一颗的根结点即可。
+
+## jim result:
+
+```java
+class Solution {
+    Map<String, Integer> count;
+    List<TreeNode> ans;
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        count = new HashMap();
+        ans = new ArrayList();
+        collect(root);
+        return ans;
+    }
+
+    public String collect(TreeNode node) {
+        if (node == null) return "#";
+        String serial = node.val + "," + collect(node.left) + "," + collect(node.right);
+        count.put(serial, count.getOrDefault(serial, 0) + 1);
+        if (count.get(serial) == 2)
+            ans.add(node);
+        return serial;
+    }
+}
+```
+
+# 538 把二叉搜索树转为累加树
+
+## question：
+
+给出二叉搜素树的根节点，该树的节点值各不相同，请你将其转化为累加树，使得每个节点node的新值大于等于原树种大于或等于node.val的值之和
+
+## jim result:
+
+```java
+class Solution {
+    int sum = 0;
+
+    public TreeNode convertBST(TreeNode root) {
+        if (root != null) {
+            convertBST(root.right);
+            sum += root.val;
+            root.val = sum;
+            convertBST(root.left);
+        }
+        return root;
+    }
+}
+```
+
+# 230 二叉搜索树中第K小的元素
+
+## question：
+
+给定一个二叉搜索树的根节点root，和一个整数k，请你设计一个算法查找第k个最小元素
+
+**BST的中序遍历是升序序列**
+
+## jim result:
+
+```java
+class Solution {
+  public ArrayList<Integer> inorder(TreeNode root, ArrayList<Integer> arr) {
+    if (root == null) return arr;
+    inorder(root.left, arr);
+    arr.add(root.val);
+    inorder(root.right, arr);
+    return arr;
+  }
+
+  public int kthSmallest(TreeNode root, int k) {
+    ArrayList<Integer> nums = inorder(root, new ArrayList<Integer>());
+    return nums.get(k - 1);
+  }
+}
+```
+
+# 230 二叉搜索树中第K小的元素
+
+## question：
+
+给定一个二叉搜索树的根节点root，和一个整数k，请你设计一个算法查找第k个最小元素
+
+## jim result:
+
+```java
+a
+```
+
